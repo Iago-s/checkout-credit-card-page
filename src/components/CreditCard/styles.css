@@ -1,0 +1,59 @@
+.card {
+  width: 90%;
+
+  padding: 10px;
+
+  border-radius: 10px;
+
+  background-color: var(--color-black);
+}
+
+.card .img-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.card .img-container img {
+  width: 50px;
+}
+
+.card .card-number {
+  font-size: 16px;
+  color: var(--color-white);
+
+  margin-bottom: 3%;
+}
+
+.card .card-name {
+  font-size: 13px;
+  color: var(--color-grey);
+
+  margin-bottom: 3%;
+}
+
+.card .row-1,
+.card .row-2 {
+  display: flex;
+  flex-direction: row;
+}
+
+.validity-text, .validity-date {
+  width: 50%;
+}
+.cvv-text, .cvv-code {
+  width: 40%;
+}
+
+.validity-text, .cvv-text {
+  font-size: 10px;
+  color: var(--color-white);
+
+  margin-bottom: 1%;
+}
+
+.validity-date, .cvv-code {
+  font-size: 8px;
+  color: var(--color-grey);
+
+  margin-bottom: 1%;
+}

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Header from '../../components/Header';
 import CreditCard from '../../components/CreditCard';
 import Nav from '../../components/Nav';
-import Form from '../../components/Form';
+import Formulario from '../../components/Form';
 
 import './styles.css';
 
@@ -33,7 +33,7 @@ export default function Checkout() {
 
           <div class="form-container">
             <Nav />
-            <Form data={[data, setData]}/>
+            <Formulario data={[data, setData]}/>
           </div>
         </div>
       </div>

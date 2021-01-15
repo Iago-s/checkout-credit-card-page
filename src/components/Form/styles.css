@@ -33,6 +33,7 @@ form .inputs-block {
 
 .inputs-block .inputs-labels {
   display: flex;
+  width: 100%;
   flex-direction: row;
   justify-content: space-between;
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Formik, Field, Form } from 'formik';
+import * as Yup from 'yup';
 
 import './styles.css';
 
@@ -7,30 +8,6 @@ export default function Formulario() {
   function handlePayout(values, actions) {
     console.log(values);
     console.log(actions);
-  }
-
-  function validate(values) {
-    const errors = {};
-    if(!values.number) {
-      errors.number = 'Número do cartão é obrigatório'
-    }
-    if(!values.name) {
-      errors.name = 'Nome impresso no cartão é obrigatório'
-    }
-    if(!values.date) {
-      errors.date = 'Validade obrigatória'
-    }
-    if(!values.cvv) {
-      errors.cvv = 'Código obrigatório'
-    }
-    if(!values.cpf) {
-      errors.cpf = 'CPF obrigatório'
-    }
-    if(!values.plots) {
-      errors.plots = 'Número de parcelas obrigatório'
-    }
-
-    return errors;
   }
 
   return (
@@ -41,29 +18,35 @@ export default function Formulario() {
         date: '',
         cvv: '',
         cpf: '',
-        plots: '',
+        plots: '1x R$1.198,00 (á vista)',
       }}
       onSubmit={handlePayout}
-      validate={validate}
-      validateOnMount={true}
+      validationSchema={schema}
       validateOnChange={true}
-      render={({ values, errors }) => (
+
+      render={({ values, errors, touched }) => (
         <Form >
           <p>Número do cartão</p>
           <Field 
             name="number"
+            style={{
+              borderColor: errors.number ? '#fc0133' : '#01ee55'
+            }}
           />
           {
-            errors.number && 
+            errors.number && touched.number && (
               <p className="message-error">{errors.number}</p>
-            
+            )
           }
           <p>Nome</p>
           <Field 
             name="name"
+            style={{
+              borderColor: errors.name ? '#fc0133' : '#01ee55'
+            }}
           />
           {
-            errors.name && (
+            errors.name && touched.name && (
               <p className="message-error">{errors.name}</p>
             )
           }
@@ -71,32 +54,41 @@ export default function Formulario() {
             <div className="inputs-labels">
               <p>Validade (MM/AA)</p>
               <p>CVV</p>
-              <p>CPF</p>
+              <p>CPF(123.123.123-38)</p>
             </div>
             <div className="inputs-row-container">
               <Field 
                 name="date"
+                style={{
+                  borderColor: errors.date ? '#fc0133' : '#01ee55'
+                }}
               />
               <Field 
                 name="cvv"
+                style={{
+                  borderColor: errors.cvv ? '#fc0133' : '#01ee55'
+                }}
               />
               <Field 
                 name="cpf"
+                style={{
+                  borderColor: errors.cpf ? '#fc0133' : '#01ee55'
+                }}
               />
             </div>
             <div className="inputs-labels">
               {
-                errors.date && (
+                errors.date && touched.date && (
                   <p className="message-error">{errors.date}</p>
                 )
               }
               {
-                errors.cvv && (
+                errors.cvv && touched.cvv && (
                   <p className="message-error">{errors.cvv}</p>
                 )
               }
               {
-                errors.cpf && (
+                errors.cpf && touched.cpf && (
                   <p className="message-error">{errors.cpf}</p>
                 )
               }
@@ -105,9 +97,18 @@ export default function Formulario() {
           <p>Número de parcelas</p>
           <Field 
             name="plots"
-          />
+            as="select"
+            className="plots-input"
+            style={{
+              borderColor: errors.plots ? '#fc0133' : '#01ee55'
+            }}
+          >
+            <option value="1x R$1.198,00 (á vista)">1x R$1.198,00 (á vista)</option>
+            <option value="2x R$599,00 (sem juros)">2x R$599,00 (sem juros)</option>
+            <option value="3x R$314,47 (á vista)">3x R$314,47 (sem juros)</option>
+          </Field>
           {
-            errors.plots && (
+            errors.plots &&  touched.plots && (
               <p className="message-error">{errors.plots}</p>
             )
           }
@@ -120,3 +121,31 @@ export default function Formulario() {
     />
   );
 }
+
+const schema = Yup.object().shape({
+  number: Yup.string()
+    .min(16, 'Informe os 16 números')
+    .max(16, 'Somente 16 números')
+    .required('Número do cartão é obrigatório.'),
+
+  name: Yup.string().required('Nome impresso no cartão é obrigatório.'),
+
+  date: Yup.string()
+    .max(5, 'Exemplo 01/21')
+    .matches(/([0-9]{2})\/([0-9]{2})/, 'Exemplo 01/21')
+    .required('Validade do cartão é obrigatório'),
+  
+  cvv: Yup.string()
+    .max(3, 'Somente 3 números')
+    .matches(/([0-9]{3})/, 'Exemplo 123')
+    .required('Código obrigatório.'),
+
+  cpf: Yup.string()
+    .min(14, 'CPF incompleto')
+    .max(14, 'Somente 11 números')
+    .matches(/([0-9]{3}[\.][0-9]{3}[\.][0-9]{3}[-][0-9]{2})/, 'Formato invalido')
+    .required('CPF é obrigatório.'),
+
+  plots: Yup.string()
+    .required('Número de parcelas obrigatório.'),
+});

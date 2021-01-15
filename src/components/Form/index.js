@@ -3,7 +3,7 @@ import './styles.css';
 export default function Form() {
   const messageError = 'Número do cartão inválido';
   return(
-    <div className="form">
+    <form >
       <p>Número do cartão</p>
       <input/>
       <p className="message-error">{messageError}</p>
@@ -29,6 +29,6 @@ export default function Form() {
       <div className="button-container">
         <button>Pagar</button>
       </div>
-    </div>
+    </form>
   );
 }

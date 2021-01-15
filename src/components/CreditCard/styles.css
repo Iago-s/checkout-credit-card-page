@@ -57,3 +57,26 @@
 
   margin-bottom: 1%;
 }
+
+@media(max-width: 400px) {
+  .card {
+    width: 100%;
+    padding: 10px 20px;
+  }
+
+  .card .card-number {
+    font-size: 20px;
+  }
+
+  .card .card-name {
+    font-size: 16px;
+  }
+
+  .validity-text, .cvv-text {
+    font-size: 13px;
+  }
+
+  .validity-date, .cvv-code {
+    font-size: 13px;
+  }
+}

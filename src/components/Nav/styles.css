@@ -49,3 +49,9 @@
   
   margin-right: 10px;
 }
+
+@media(max-width: 400px) {
+  .nav-container {
+    display: none;
+  }
+}

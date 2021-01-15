@@ -18,3 +18,9 @@ header .nav {
 
   background-color: var(--color-grey)
 }
+
+@media(max-width: 400px) {
+  header {
+    display: none;
+  }
+}

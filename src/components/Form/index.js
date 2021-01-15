@@ -33,7 +33,6 @@ export default function Formulario() {
     return errors;
   }
 
-  const messageError = 'Número do cartão inválido';
   return (
     <Formik
       initialValues={{

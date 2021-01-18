@@ -1,7 +1,11 @@
 import Checkout from './pages/Checkout';
 
+import CardProvider from './context/Card';
+
 export default function App() {
   return (
-    <Checkout />
+    <CardProvider>
+      <Checkout />
+    </CardProvider>
   );
 }

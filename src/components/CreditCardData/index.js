@@ -2,31 +2,41 @@ import { useState } from 'react';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 
+import { useCard } from '../../context/Card';
+
 import './styles.css';
 
-export default function Formulario() {
-  function handlePayout(values, actions) {
-    console.log(values);
-    console.log(actions);
-  }
+export default function CreditCardData() {
+  const { values, setValues } = useCard();
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  return (
-    <Formik
-      initialValues={{
+  function handlePayout(values, actions) {
+    setIsLoaded(true);
+    setTimeout(() => {
+      setIsLoaded(false);
+      setValues({
         number: '',
         name: '',
         date: '',
         cvv: '',
         cpf: '',
-        plots: '1x R$1.198,00 (á vista)',
-      }}
+        plots: '1x R$1.198,00 (á vista)'
+      });
+      actions.resetForm();
+    }, 3000);
+  }
+
+  return (
+    <Formik
+      initialValues={values}
       onSubmit={handlePayout}
       validationSchema={schema}
       validateOnChange={true}
 
-      render={({ values, errors, touched }) => (
+      render={({ errors, touched, values }) => (
         <Form >
           <p>Número do cartão</p>
+          { setValues(values) }
           <Field 
             name="number"
             style={{
@@ -44,6 +54,7 @@ export default function Formulario() {
             style={{
               borderColor: errors.name ? '#fc0133' : '#01ee55'
             }}
+            value={values.name.toUpperCase()}
           />
           {
             errors.name && touched.name && (
@@ -114,7 +125,7 @@ export default function Formulario() {
           }
 
           <div className="button-container">
-            <button type="submit">Pagar</button>
+            <button type="submit">{isLoaded === false ? 'Pagar' : 'Carregando'}</button>
           </div>
         </Form>
       )}
@@ -122,7 +133,7 @@ export default function Formulario() {
   );
 }
 
-const schema = Yup.object().shape({
+const schema = Yup.object().shape({ 
   number: Yup.string()
     .min(16, 'Informe os 16 números')
     .max(16, 'Somente 16 números')

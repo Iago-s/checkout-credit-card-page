@@ -18,7 +18,7 @@ Tecnologias usadas no projeto.
 
 ## Começando
 
-1. Clone o repositório `git clone https://github.com/Iago-s/frontend-test.git`
-2. Vá para a pasta criada `cd frontend-test`
+1. Clone o repositório `git clone https://github.com/Iago-s/checkout-credit-card-page.git`
+2. Vá para a pasta criada `cd checkout-credit-card-page`
 3. Instale as dependências `npm install`
 4. Execute o projeto `npm start`

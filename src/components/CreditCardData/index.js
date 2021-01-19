@@ -34,7 +34,7 @@ export default function CreditCardData() {
       validateOnChange={true}
 
       render={({ errors, touched, values }) => (
-        <Form >
+        <Form className="form">
           <p>Número do cartão</p>
           { setValues(values) }
           <Field 
@@ -65,7 +65,7 @@ export default function CreditCardData() {
             <div className="inputs-labels">
               <p>Validade (MM/AA)</p>
               <p>CVV</p>
-              <p>CPF(123.123.123-38)</p>
+              <p>CPF(123.123.123-12)</p>
             </div>
             <div className="inputs-row-container">
               <Field 

@@ -6,7 +6,7 @@
 <p align="center">Página de pagamento com cartão de crédito</p>
 
 <div align="center">
-  <img src="./src/assets/layout/desktop.png" alt="Desktop layout" height="425">
+  <img src="./src/assets/layout/desktop.png" alt="Desktop layout" height="425" width="700">
   <img src="./src/assets/layout/mobile.jpeg" alt="Mobile layout" height="425">
 </div>
 
